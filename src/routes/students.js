@@ -19,12 +19,16 @@ router.route('/')
 
 router.route('/:id')
     .get(async (req, res) => {
-        await db('students')
-            .where('id', req.params.id)
+        await db
+            .select('students.id as id', 'students.name as name', 'cohorts.name as cohort')
+            .from('students')
+            .innerJoin('cohorts', 'students.cohort_id', 'cohorts.id')
+            .where('students.id', req.params.id)
             .then(
                 student => student.length === 0
                 ? res.status(404).json({ message: "The student with the specified ID does not exist." })
-                : res.status(200).json(student))
+                : res.status(200).json(student)
+            )
             .catch(err => res.status(500).json({ error: "Student could not be retrieved."}));
     })
     .put(async (req, res) => {
