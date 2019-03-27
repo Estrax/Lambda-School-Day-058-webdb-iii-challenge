@@ -16,5 +16,9 @@
   },
   "devDependencies": {
     "nodemon": "^1.18.10"
+  },
+  "scripts": {
+    "start": "node index",
+    "server": "nodemon index"
   }
 }
