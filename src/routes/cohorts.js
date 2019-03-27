@@ -35,7 +35,8 @@ router.route('/:id')
             .then(
                 cohort => cohort.length === 0
                 ? res.status(404).json({ message: "The cohort with the specified ID does not exist." })
-                : cohort => res.status(200).json(cohort))
+                : res.status(200).json(cohort)
+            )
             .catch(err => res.status(500).json({ error: "Cohort could not be updated."}));
     })
     .delete(async (req, res) => {
@@ -45,7 +46,7 @@ router.route('/:id')
             .then(
                 cohort => cohort.length === 0
                 ? res.status(404).json({ message: "The cohort with the specified ID does not exist." })
-                : cohort => res.status(200).json(cohort))
+                : res.status(200).json(cohort))
             .catch(err => res.status(500).json({ error: "Cohort could not be deleted." }));
     });
 
