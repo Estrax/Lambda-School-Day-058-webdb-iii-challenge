@@ -60,7 +60,7 @@ router.route('/:id/students')
                 : db('students')
                     .where('cohort_id', req.params.id)
                     .then(students =>
-                        students.length === 0
+                        students === 0
                         ? res.status(404).json({ message: "The students with the specified cohort ID does not exist." })
                         : res.status(200).json(students))
                     .catch(err => res.status(500).json({ error: "Students could not be retrieved" }))
